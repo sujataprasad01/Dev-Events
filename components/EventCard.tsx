@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CiCalendarDate, CiTimer, CiLocationOn } from 'react-icons/ci'
+import posthog from 'posthog-js'
 
 interface Props {
   title: string
@@ -17,6 +18,15 @@ const EventCard = ({ title, image, slug, location, date, time }: Props) => {
   return (
     <Link
       href={`/events/${slug}`}
+      onClick={() => {
+        posthog.capture('event-card-clicked', {
+          event_title: title,
+          event_slug: slug,
+          event_location: location,
+          event_date: date,
+          event_time: time,
+        })
+      }}
       className="relative block h-full rounded-lg overflow-hidden shadow hover:shadow-lg transition flex justify-center items-center p-4 bg-white/5 border border-white/10 
         backdrop-blur-xl "
     >

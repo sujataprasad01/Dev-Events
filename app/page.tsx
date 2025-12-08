@@ -1,3 +1,5 @@
+'use client';
+import posthog from 'posthog-js';
 import React from "react";
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
@@ -26,7 +28,7 @@ const Page = () => {
         Hackathons, Meetup, and Conferences, All in One Place
       </p>
 
-      <div className="mt-6 flex justify-center">
+      <div className="mt-6 flex justify-center" onClick={() => posthog.capture('explore_button_clicked')}>
         <ExploreBtn />
       </div>
 
@@ -36,7 +38,7 @@ const Page = () => {
         {/* GRID: 1 col mobile, 2 sm, 3 lg */}
 <ul className="grid grid-cols-3 gap-20">
   {events.map((event) => (
-    <li key={event.slug}>
+    <li key={event.slug} onClick={() => posthog.capture('event_card_clicked', { event_slug: event.slug, event_title: event.title, event_location: event.location })}>
       <EventCard {...event} />
     </li>
   ))}

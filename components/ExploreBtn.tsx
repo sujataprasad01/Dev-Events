@@ -1,5 +1,6 @@
 'use client';
 import React from 'react'
+import posthog from 'posthog-js';
 import { FaArrowDown } from "react-icons/fa";
 
 const ExploreBtn = () => {
@@ -11,7 +12,10 @@ const ExploreBtn = () => {
         backdrop-blur-xl 
         rounded-full 
         px-6 py-3"
-      onClick={() => console.log('Click')}
+      onClick={() => {
+        posthog.capture('explore_events_clicked', { target_section: '#events' });
+        console.log('Click');
+      }}
     >
       <a 
         href="#events" 
