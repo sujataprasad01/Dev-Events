@@ -1,6 +1,7 @@
 'use client';
 import React from "react";
 import { FaConnectdevelop } from "react-icons/fa";
+import posthog from 'posthog-js';
 
 const Navbar = () => {
   return (
@@ -22,13 +23,13 @@ const Navbar = () => {
 
         {/* Right: Nav Items */}
         <div className="flex items-center gap-8">
-          <a href="#" className="text-white/80 hover:text-white font-semibold transition">
+          <a href="#" className="text-white/80 hover:text-white font-semibold transition" onClick={() => posthog.capture('navbar_link_clicked', { link_text: 'Home', link_href: '#' })}>
             Home
           </a>
-          <a href="#" className="text-white/80 hover:text-white font-semibold transition">
+          <a href="#" className="text-white/80 hover:text-white font-semibold transition" onClick={() => posthog.capture('navbar_link_clicked', { link_text: 'Events', link_href: '#' })}>
             Events
           </a>
-          <a href="#" className="text-white/80 hover:text-white font-semibold transition">
+          <a href="#" className="text-white/80 hover:text-white font-semibold transition" onClick={() => posthog.capture('navbar_link_clicked', { link_text: 'Create Event', link_href: '#' })}>
             Create Event
           </a>
         </div>

@@ -1,6 +1,7 @@
 'use client';
 import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import posthog from 'posthog-js';
 import { EffectComposer, EffectPass, RenderPass, Effect } from 'postprocessing';
 import './PixelBlast.css';
 
@@ -542,6 +543,13 @@ const PixelBlast: React.FC<PixelBlastProps> = ({
         uniforms.uClickPos.value[ix].set(fx, fy);
         uniforms.uClickTimes.value[ix] = uniforms.uTime.value;
         if (threeRef.current) threeRef.current.clickIx = (ix + 1) % MAX_CLICKS;
+        posthog.capture('pixel-blast-interaction', {
+          variant: variant,
+          ripples_enabled: enableRipples,
+          liquid_enabled: liquid,
+          position_x: fx,
+          position_y: fy
+        });
       };
       const onPointerMove = (e: PointerEvent) => {
         if (!touch) return;
