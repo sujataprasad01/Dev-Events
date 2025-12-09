@@ -12,6 +12,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.556.0",
+    "mongoose": "^9.0.1",
     "next": "16.0.7",
     "posthog-js": "^1.302.2",
     "posthog-node": "^5.17.2",
@@ -19,6 +20,7 @@
     "react": "19.2.0",
     "react-dom": "19.2.0",
     "react-icons": "^5.5.0",
+    "slugify": "^1.6.6",
     "tailwind-merge": "^3.4.0",
     "three": "^0.167.1"
   },
