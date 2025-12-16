@@ -1,21 +1,17 @@
 import React from "react";
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
+import { IEvent } from "@/database";
+import { cacheLife } from "next/cache";
 
-const events = [
-  { title: "Event 1 nfjsnk", slug: "event-1", location: "NY", date: "2024", time: "18:00", image: "/images/event1.jpeg" },
-  { title: "Event 2", slug: "event-2", location: "CA", date: "2024", time: "10:00", image: "/images/evvent2.jpeg" },
-  { title: "Event 3", slug: "event-3", location: "Berlin", date: "2024", time: "14:00", image: "/images/event1.jpeg" },
-  { title: "Event 4", slug: "event-4", location: "Tokyo", date: "2024", time: "09:00", image: "/images/event1.jpeg" },
-  { title: "Event 5", slug: "event-5", location: "Paris", date: "2024", time: "11:00", image: "/images/event1.jpeg" },
-  { title: "Event 6", slug: "event-6", location: "London", date: "2024", time: "16:00", image: "/images/event1.jpeg" },
-  { title: "Event 7", slug: "event-7", location: "Tokyo", date: "2024", time: "09:00", image: "/images/event1.jpeg" },
-  { title: "Event 8", slug: "event-8", location: "Paris", date: "2024", time: "11:00", image: "/images/event1.jpeg" },
-  { title: "Event 9", slug: "event-9", location: "London", date: "2024", time: "16:00", image: "/images/event1.jpeg" },
-];
+const BASE_URL=process.env.NEXT_PUBLIC_BASE_URL;
 
+const Page = async() => {
+  'use cache';
+  cacheLife('hours');
 
-const Page = () => {
+  const response=await fetch(`${BASE_URL}/api/events`);
+  const {events}= await response.json();
   return (
     <section className="mt-8 px-20">
       <h1 className="text-xl text-center">
@@ -35,7 +31,7 @@ const Page = () => {
 
         {/* GRID: 1 col mobile, 2 sm, 3 lg */}
 <ul className="grid grid-cols-3 gap-20">
-  {events.map((event) => (
+  {events && events.length>0 && events.map((event: IEvent) => (
     <li key={event.slug}>
       <EventCard {...event} />
     </li>

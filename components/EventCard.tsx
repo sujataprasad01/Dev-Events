@@ -14,19 +14,22 @@ interface Props {
 }
 
 const EventCard = ({ title, image, slug, location, date, time }: Props) => {
+  const safeImage = image?.startsWith("https://res.cloudinary.com")
+    ? image
+    : "/placeholder.jpg";
   return (
     <Link
-      href={`/events/${slug}`}
+      href={`/event/${slug}`}
       className="relative block h-full rounded-lg overflow-hidden shadow hover:shadow-lg transition flex justify-center items-center p-4 bg-white/5 border border-white/10 
         backdrop-blur-xl "
     >
       {/* Event Image */}
       <Image
-        src={image}
+        src={safeImage}
         alt={title}
-        width={360}
-        height={380}
-        className=" h-full object-cover"
+        width={320}
+        height={320}
+        className="w-78 h-78 object-cover rounded-lg"
       />
 
       {/* Glass overlay for text */}
