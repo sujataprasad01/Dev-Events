@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { CiCalendarDate, CiTimer, CiLocationOn } from 'react-icons/ci'
+import posthog from 'posthog-js'
 
 interface Props {
   title: string

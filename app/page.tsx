@@ -1,3 +1,5 @@
+'use client';
+import posthog from 'posthog-js';
 import React from "react";
 import EventCard from "@/components/EventCard";
 import ExploreBtn from "@/components/ExploreBtn";
@@ -22,7 +24,7 @@ const Page = async() => {
         Hackathons, Meetup, and Conferences, All in One Place
       </p>
 
-      <div className="mt-6 flex justify-center">
+      <div className="mt-6 flex justify-center" onClick={() => posthog.capture('explore_button_clicked')}>
         <ExploreBtn />
       </div>
 
