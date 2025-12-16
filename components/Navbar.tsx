@@ -18,12 +18,12 @@ const Navbar = () => {
         {/* Left: Logo + Title */}
         <div className="flex items-center gap-3">
           <FaConnectdevelop className="text-white text-2xl" />
-          <span className="text-white text-lg font-medium">DevEvents</span>
+          <a href="/" className="text-white text-lg font-medium">DevEvents</a>
         </div>
 
         {/* Right: Nav Items */}
         <div className="flex items-center gap-8">
-          <a href="#" className="text-white/80 hover:text-white font-semibold transition" onClick={() => posthog.capture('navbar_link_clicked', { link_text: 'Home', link_href: '#' })}>
+          <a href="/" className="text-white/80 hover:text-white font-semibold transition">
             Home
           </a>
           <a href="#" className="text-white/80 hover:text-white font-semibold transition" onClick={() => posthog.capture('navbar_link_clicked', { link_text: 'Events', link_href: '#' })}>

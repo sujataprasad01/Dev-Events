@@ -50,6 +50,11 @@ const EventSchema = new Schema<IEvent>(
       type: String,
       required: [true, 'Image URL is required'],
       trim: true,
+        validate: {
+    validator: (v: string) =>
+      v.startsWith("https://res.cloudinary.com/"),
+    message: "Image must be a Cloudinary URL",
+  },
     },
     venue: {
       type: String,
@@ -172,7 +177,7 @@ function normalizeTime(timeString: string): string {
 }
 
 // Create unique index on slug for better performance
-EventSchema.index({ slug: 1 }, { unique: true });
+EventSchema.index({ slug: 1 });
 
 // Create compound index for common queries
 EventSchema.index({ date: 1, mode: 1 });
